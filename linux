@@ -13,17 +13,18 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 set -e
 ### end common-components/exit-trap
 
-if [[ ! -d "$HOME/.bin/" ]]; then
-  mkdir "$HOME/.bin"
+# [mm] changed ~/.bin to ~/bin
+if [[ ! -d "$HOME/bin/" ]]; then
+  mkdir "$HOME/bin"
 fi
 
 if [ ! -f "$HOME/.zshrc" ]; then
   touch $HOME/.zshrc
 fi
 
-if [[ ":$PATH:" != *":$HOME/.bin:"* ]]; then
-  printf 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
-  export PATH="$HOME/.bin:$PATH"
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+  printf 'export PATH="$HOME/bin:$PATH"\n' >> ~/.zshrc
+  export PATH="$HOME/bin:$PATH"
 fi
 ### end common-components/check-home-bin
 

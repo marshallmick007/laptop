@@ -13,17 +13,18 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 set -e
 ### end common-components/exit-trap
 
-if [[ ! -d "$HOME/.bin/" ]]; then
-  mkdir "$HOME/.bin"
+# [mm] changed ~/.bin to ~/bin
+if [[ ! -d "$HOME/bin/" ]]; then
+  mkdir "$HOME/bin"
 fi
 
 if [ ! -f "$HOME/.zshrc" ]; then
   touch $HOME/.zshrc
 fi
 
-if [[ ":$PATH:" != *":$HOME/.bin:"* ]]; then
-  printf 'export PATH="$HOME/.bin:$PATH"\n' >> ~/.zshrc
-  export PATH="$HOME/.bin:$PATH"
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+  printf 'export PATH="$HOME/bin:$PATH"\n' >> ~/.zshrc
+  export PATH="$HOME/bin:$PATH"
 fi
 ### end common-components/check-home-bin
 
@@ -69,17 +70,11 @@ fancy_echo "Updating Homebrew formulas ..."
 brew update
 ### end mac-components/homebrew
 
-fancy_echo "Installing Postgres, a good open source relational database ..."
-  brew_install_or_upgrade 'postgres' '--no-python'
-
-fancy_echo "Installing Redis, a good key-value database ..."
-  brew_install_or_upgrade 'redis'
-
 fancy_echo "Installing The Silver Searcher (better than ack or grep) to search the contents of files ..."
   brew_install_or_upgrade 'the_silver_searcher'
 
 fancy_echo "Installing vim from Homebrew to get the latest version ..."
-  brew_install_or_upgrade 'vim'
+  brew_install_or_upgrade 'macvim'
 
 fancy_echo "Installing ctags, to index files for vim tab completion of methods, classes, variables ..."
   brew_install_or_upgrade 'ctags'
@@ -93,8 +88,29 @@ fancy_echo "Installing reattach-to-user-namespace, for copy-paste and RubyMotion
 fancy_echo "Installing ImageMagick, to crop and resize images ..."
   brew_install_or_upgrade 'imagemagick'
 
-fancy_echo "Installing QT, used by Capybara Webkit for headless Javascript integration testing ..."
-  brew_install_or_upgrade 'qt'
+fancy_echo "Installing mysql ..."
+  brew_install_or_upgrade 'mysql'
+
+fancy_echo "Installing php ..."
+  brew_install_or_upgrade 'php54'
+
+fancy_echo "Installing nginx ..."
+  brew_install_or_upgrade 'nginx'
+
+fancy_echo "Installing ack ..."
+  brew_install_or_upgrade 'ack'
+
+fancy_echo "Installing tree ..."
+  brew_install_or_upgrade 'tree'
+
+fancy_echo "Installing htop ..."
+  brew_install_or_upgrade 'htop-osx'
+
+fancy_echo "Installing unrar ..."
+  brew_install_or_upgrade 'unrar'
+
+fancy_echo "Installing wget ..."
+  brew_install_or_upgrade 'wget'
 
 fancy_echo "Installing watch, to execute a program periodically and show the output ..."
   brew_install_or_upgrade 'watch'
@@ -116,8 +132,9 @@ fancy_echo "Installing NVM, Node.js, and NPM, for running apps and installing Ja
   nvm alias default "$node_version"
 ### end mac-components/packages
 
-fancy_echo "Starting Postgres ..."
-  brew services restart postgresql
+# [mm] - do not start postgres (not installed yet)
+#fancy_echo "Starting Postgres ..."
+#  brew services restart postgresql
 ### end mac-components/start-services
 
 fancy_echo "Installing rbenv, to change Ruby versions ..."
@@ -177,8 +194,8 @@ fancy_echo "Installing the heroku-config plugin to pull config variables locally
   heroku plugins:install git://github.com/ddollar/heroku-config.git
 ### end mac-components/heroku
 
-fancy_echo "Installing GitHub CLI client ..."
-  brew_install_or_upgrade 'hub'
+#fancy_echo "Installing GitHub CLI client ..."
+#  brew_install_or_upgrade 'hub'
 ### end mac-components/github
 
 if ! command -v rcup &>/dev/null; then

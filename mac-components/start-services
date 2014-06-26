@@ -1,2 +1,3 @@
-fancy_echo "Starting Postgres ..."
-  brew services restart postgresql
+# [mm] - do not start postgres (not installed yet)
+#fancy_echo "Starting Postgres ..."
+#  brew services restart postgresql
