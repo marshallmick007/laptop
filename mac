@@ -115,6 +115,9 @@ fancy_echo "Installing wget ..."
 fancy_echo "Installing watch, to execute a program periodically and show the output ..."
   brew_install_or_upgrade 'watch'
 
+fancy_echo "Installing watch, to execute a program periodically and show the output ..."
+  brew_install_or_upgrade 'gpg'
+
 node_version="0.10.28"
 
 fancy_echo "Installing NVM, Node.js, and NPM, for running apps and installing JavaScript packages ..."
@@ -176,6 +179,18 @@ fancy_echo "Updating to latest Rubygems version ..."
 
 fancy_echo "Installing Bundler to install project-specific Ruby gems ..."
   gem install bundler --no-document --pre
+
+fancy-echo "Installing Unicorn"
+  gem install unicorn --no-document --no-ri
+
+fancy-echo "Installing Rake"
+  gem install rake --no-document --no-ri
+
+fancy-echo "Installing Rack"
+  gem install rack --no-document --no-ri
+
+fancy-echo "Installing Sinatra"
+  gem install sinatra --no-document --no-ri
 ### end common-components/ruby-environment
 
 fancy_echo "Configuring Bundler for faster, parallel gem installation ..."

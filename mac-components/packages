@@ -43,6 +43,9 @@ fancy_echo "Installing wget ..."
 fancy_echo "Installing watch, to execute a program periodically and show the output ..."
   brew_install_or_upgrade 'watch'
 
+fancy_echo "Installing watch, to execute a program periodically and show the output ..."
+  brew_install_or_upgrade 'gpg'
+
 node_version="0.10.28"
 
 fancy_echo "Installing NVM, Node.js, and NPM, for running apps and installing JavaScript packages ..."

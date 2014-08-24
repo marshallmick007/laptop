@@ -12,3 +12,15 @@ fancy_echo "Updating to latest Rubygems version ..."
 
 fancy_echo "Installing Bundler to install project-specific Ruby gems ..."
   gem install bundler --no-document --pre
+
+fancy-echo "Installing Unicorn"
+  gem install unicorn --no-document --no-ri
+
+fancy-echo "Installing Rake"
+  gem install rake --no-document --no-ri
+
+fancy-echo "Installing Rack"
+  gem install rack --no-document --no-ri
+
+fancy-echo "Installing Sinatra"
+  gem install sinatra --no-document --no-ri
