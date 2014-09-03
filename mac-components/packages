@@ -19,8 +19,11 @@ fancy_echo "Installing ImageMagick, to crop and resize images ..."
 fancy_echo "Installing mysql ..."
   brew_install_or_upgrade 'mysql'
 
+fancy_echo "Installing gd"
+  brew_install_or_upgrade 'gd'
+
 fancy_echo "Installing php ..."
-  brew_install_or_upgrade 'php54'
+  brew_install_or_upgrade '--without-apache --with-fpm --with-mysql php54'
 
 fancy_echo "Installing nginx ..."
   brew_install_or_upgrade 'nginx'

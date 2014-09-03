@@ -12,5 +12,9 @@ else
   fancy_echo "Homebrew already installed. Skipping ..."
 fi
 
+fancy_echo "Tapping php..."
+brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/homebrew-php
 fancy_echo "Updating Homebrew formulas ..."
 brew update
