@@ -8,7 +8,7 @@ brew_install_or_upgrade() {
 
 brew_cask_install_or_upgrade() {
   if brew cask list -1 | grep -Fqx "$1"; then
-    (brew upgrade "$@") || true
+    echo "'$1' is already installed"
   else
     brew cask install "$@"
   fi
