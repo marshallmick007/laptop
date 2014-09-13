@@ -158,16 +158,16 @@ fancy_echo "Updating to latest Rubygems version ..."
 fancy_echo "Installing Bundler to install project-specific Ruby gems ..."
   gem install bundler --no-document --pre
 
-fancy-echo "Installing Unicorn"
+fancy_echo "Installing Unicorn"
   gem install unicorn --no-document --no-ri
 
-fancy-echo "Installing Rake"
+fancy_echo "Installing Rake"
   gem install rake --no-document --no-ri
 
-fancy-echo "Installing Rack"
+fancy_echo "Installing Rack"
   gem install rack --no-document --no-ri
 
-fancy-echo "Installing Sinatra"
+fancy_echo "Installing Sinatra"
   gem install sinatra --no-document --no-ri
 ### end common-components/ruby-environment
 

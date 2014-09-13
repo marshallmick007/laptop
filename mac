@@ -44,6 +44,14 @@ brew_install_or_upgrade() {
     brew install "$@"
   fi
 }
+
+brew_cask_install_or_upgrade() {
+  if brew cask list -1 | grep -Fqx "$1"; then
+    (brew upgrade "$@") || true
+  else
+    brew cask install "$@"
+  fi
+}
 ### end mac-components/mac-functions
 
 if [[ -f /etc/zshenv ]]; then
@@ -66,8 +74,20 @@ else
   fancy_echo "Homebrew already installed. Skipping ..."
 fi
 
+fancy_echo "Tapping php..."
+brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/homebrew-php
+
+fancy_echo "Tapping cask..."
+brew tap caskroom/cask
+
+fancy_echo "Installing Brew Cask"
+brew_install_or_upgrade brew-cask
+
 fancy_echo "Updating Homebrew formulas ..."
 brew update
+
 ### end mac-components/homebrew
 
 fancy_echo "Installing The Silver Searcher (better than ack or grep) to search the contents of files ..."
@@ -91,8 +111,18 @@ fancy_echo "Installing ImageMagick, to crop and resize images ..."
 fancy_echo "Installing mysql ..."
   brew_install_or_upgrade 'mysql'
 
+fancy_echo "Installing gd"
+  brew_install_or_upgrade 'gd'
+
 fancy_echo "Installing php ..."
-  brew_install_or_upgrade 'php54'
+  brew_install_or_upgrade 'php54' '--without-apache --with-fpm --with-mysql'
+#  if brew list -1 | grep -Fqx "php"; then
+#    (brew upgrade --without-apache --with-fpm --with-mysql php54) || true
+#  else
+#    brew install --without-apache --with-fpm --with-mysql php54
+#  fi
+
+
 
 fancy_echo "Installing nginx ..."
   brew_install_or_upgrade 'nginx'
@@ -133,6 +163,33 @@ fancy_echo "Installing NVM, Node.js, and NPM, for running apps and installing Ja
 
   fancy_echo "Setting $node_version as the global default nodejs..."
   nvm alias default "$node_version"
+
+
+fancy_echo "Installing Casks..."
+fancy_echo "Installing alfred..."
+brew_cask_install_or_upgrade alfred
+fancy_echo "Installing caffeine..."
+brew_cask_install_or_upgrade caffeine
+fancy_echo "Installing day-o..."
+brew_cask_install_or_upgrade day-o
+fancy_echo "Installing dropbox..."
+brew_cask_install_or_upgrade dropbox
+fancy_echo "Installing evernote..."
+brew_cask_install_or_upgrade evernote
+fancy_echo "Installing hive..."
+brew_cask_install_or_upgrade hive
+fancy_echo "Installing iterm2..."
+brew_cask_install_or_upgrade iterm2
+fancy_echo "Installing nvalt..."
+brew_cask_install_or_upgrade nvalt
+fancy_echo "Installing sequel-pro..."
+brew_cask_install_or_upgrade sequel-pro
+fancy_echo "Installing teamviewer..."
+brew_cask_install_or_upgrade teamviewer
+fancy_echo "Installing transmission..."
+brew_cask_install_or_upgrade transmission
+fancy_echo "Installing vlc..."
+brew_cask_install_or_upgrade vlc
 ### end mac-components/packages
 
 # [mm] - do not start postgres (not installed yet)
@@ -180,16 +237,16 @@ fancy_echo "Updating to latest Rubygems version ..."
 fancy_echo "Installing Bundler to install project-specific Ruby gems ..."
   gem install bundler --no-document --pre
 
-fancy-echo "Installing Unicorn"
+fancy_echo "Installing Unicorn"
   gem install unicorn --no-document --no-ri
 
-fancy-echo "Installing Rake"
+fancy_echo "Installing Rake"
   gem install rake --no-document --no-ri
 
-fancy-echo "Installing Rack"
+fancy_echo "Installing Rack"
   gem install rack --no-document --no-ri
 
-fancy-echo "Installing Sinatra"
+fancy_echo "Installing Sinatra"
   gem install sinatra --no-document --no-ri
 ### end common-components/ruby-environment
 
@@ -202,11 +259,11 @@ fancy_echo "Installing Suspenders, thoughtbot's Rails template ..."
   gem install suspenders --no-document
 ### end common-components/default-gems
 
-fancy_echo "Installing Heroku CLI client ..."
-  brew_install_or_upgrade 'heroku-toolbelt'
+# fancy_echo "Installing Heroku CLI client ..."
+#  brew_install_or_upgrade 'heroku-toolbelt'
 
-fancy_echo "Installing the heroku-config plugin to pull config variables locally to be used as ENV variables ..."
-  heroku plugins:install git://github.com/ddollar/heroku-config.git
+#fancy_echo "Installing the heroku-config plugin to pull config variables locally to be used as ENV variables ..."
+#  heroku plugins:install git://github.com/ddollar/heroku-config.git
 ### end mac-components/heroku
 
 #fancy_echo "Installing GitHub CLI client ..."

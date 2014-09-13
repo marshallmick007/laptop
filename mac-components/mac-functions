@@ -5,3 +5,11 @@ brew_install_or_upgrade() {
     brew install "$@"
   fi
 }
+
+brew_cask_install_or_upgrade() {
+  if brew cask list -1 | grep -Fqx "$1"; then
+    (brew upgrade "$@") || true
+  else
+    brew cask install "$@"
+  fi
+}

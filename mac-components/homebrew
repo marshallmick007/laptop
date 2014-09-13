@@ -16,5 +16,13 @@ fancy_echo "Tapping php..."
 brew tap homebrew/dupes
 brew tap homebrew/versions
 brew tap homebrew/homebrew-php
+
+fancy_echo "Tapping cask..."
+brew tap caskroom/cask
+
+fancy_echo "Installing Brew Cask"
+brew_install_or_upgrade brew-cask
+
 fancy_echo "Updating Homebrew formulas ..."
 brew update
+
